@@ -248,7 +248,7 @@ def main(argv: Optional[list[str]] = None) -> None:
         description="Preprocess CDC hospital data into clean state-week + model-ready datasets."
     )
     parser.add_argument("--raw", type=str, default="data/raw/Weekly_HospitaWeekly_Hospital_Respiratory_Data.csv")
-    parser.add_argument("--out_state_week", type=str, default="data/cleaned/state_week_50.csv")
+    parser.add_argument("--out_state_week", type=str, default="data/cleaned/CareForHospitalsCleanedData.csv")
     parser.add_argument("--out_model_ready", type=str, default="data/cleaned/model_ready.csv")
     parser.add_argument("--missing", type=str, default="state_median", choices=["drop", "ffill", "state_median"])
     parser.add_argument("--keepall", action="store_true", help="Keep territories/regions too (not recommended).")
