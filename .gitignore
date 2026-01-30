@@ -17,7 +17,8 @@ data/*.xlsx
 data/*.parquet
 
 # Models / outputs
-models/
+models/*
+!models/.gitkeep
 mlruns/
 *.pkl
 *.joblib
