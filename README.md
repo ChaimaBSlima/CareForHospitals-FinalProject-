@@ -38,7 +38,7 @@ All modeling is performed at the **state-week level**, aggregated across reporti
 
 # 📁 Project Structure:
 
-│
+```
 ├── data/
 │ ├── raw/
 │ ├── cleaned/
@@ -63,7 +63,7 @@ All modeling is performed at the **state-week level**, aggregated across reporti
 │
 ├── README.md
 └── requirements.txt
-
+```
 ---
 #  Data Cleaning & Feature Engineering 🔧:
 
