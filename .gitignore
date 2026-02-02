@@ -12,6 +12,7 @@ __pycache__/
 
 # Data (don't commit raw data)
 data/raw/
+data/cleaned
 data/*.csv
 data/*.xlsx
 data/*.parquet
