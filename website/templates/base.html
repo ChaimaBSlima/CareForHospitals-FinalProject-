@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title if title else "Care For Hospitals Dashboard" }}</title>
+  <link rel="icon" href="{{ url_for('static', filename= 'images/icon.jpg') }}" type="image/jpg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <img src="{{ url_for('static', filename= 'images/icon.jpg') }}" alt= "Care For Hospitals Logo" style ="width: 100px">
+        <h1 style = "margin-left: 12px">  Care For Hospitals </h1>
+      </div>
+      <nav class="nav">
+        <a href="{{ url_for('main.index') }}">State view</a>
+        <a href="{{ url_for('main.top_risk') }}"> Top risky states</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% if missing_cols and missing_cols|length > 0 %}
+      <div class="warn">
+        Some columns are missing in the forecast file: <b>{{ ", ".join(missing_cols) }}</b>.
+        Pages will still work but some values may show as N/A.
+      </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p> Machine Learning  pipeline & Website made by: <code> Chaima Ben Slima </code></p>
+    </div>
+  </footer>
+</body>
+</html>

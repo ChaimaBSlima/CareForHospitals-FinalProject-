@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Select a State</h1>
+  <p>This dashboard shows next-week forecasts and risk signals per U.S. state.</p>
+
+  <form method="get" action="/">
+    <label for="state">State:</label>
+    <select name="state" id="state" required>
+      <option value="" selected disabled>Choose...</option>
+         {% for code, label in state_options %}
+            <option value="{{ code }}">{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Open</button>
+  </form>
+
+
+{% endblock %}

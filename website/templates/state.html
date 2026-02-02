@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if not_found %}
+    <h1>State not found: {{ state }}</h1>
+    <p><a href="{{ url_for('main.index') }}">Go back</a></p>
+  {% else %}
+    <h1>State Forecast — {{ data.state }}</h1>
+    <p>
+      <b>Current week:</b> {{ data.current_week }} &nbsp; | &nbsp;
+      <b>Forecast week:</b> {{ data.forecast_week }}
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">ICU forecast</div>
+        <div class="value">{{ data.icu }}</div>
+      </div>
+      <div class="card">
+        <div class="label">Inpatient forecast</div>
+        <div class="value">{{ data.inpatient }}</div>
+      </div>
+      <div class="card">
+        <div class="label">Critical stress risk</div>
+        <div class="value">
+          {% if data.risk_pred == 1 %}
+            <span class="pill pill-red">HIGH</span>
+          {% else %}
+            <span class="pill pill-green">LOW</span>
+          {% endif %}
+          <span class="muted">(p={{ data.risk_proba }})</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label">Disease burden forecast</div>
+        <div class="value">{{ data.disease }}</div>
+      </div>
+    </div>
+
+    <h2>Recommendation</h2>
+    <div class="card">
+      {{ data.recommendation }}
+    </div>
+
+    <h2>Suggested Neighbor State</h2>
+    {% if neighbor_data %}
+      <p>Suggested neighbor: <b>{{ neighbor_data.state }}</b></p>
+      <div class="grid">
+        <div class="card"><div class="label">ICU</div><div class="value">{{ neighbor_data.icu }}</div></div>
+        <div class="card"><div class="label">Inpatient</div><div class="value">{{ neighbor_data.inpatient }}</div></div>
+        <div class="card">
+          <div class="label">Risk</div>
+          <div class="value">
+            {% if neighbor_data.risk_pred == 1 %}
+              <span class="pill pill-red">HIGH</span>
+            {% else %}
+              <span class="pill pill-green">LOW</span>
+            {% endif %}
+            <span class="muted">(p={{ neighbor_data.risk_proba }})</span>
+          </div>
+        </div>
+        <div class="card"><div class="label">Disease burden</div><div class="value">{{ neighbor_data.disease }}</div></div>
+      </div>
+    {% else %}
+      <p class="muted">No neighbor details available.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

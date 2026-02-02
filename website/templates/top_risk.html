@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Top Risky States</h1>
+<p>Sorted by highest critical risk probability</p>
+
+{% if top_risks and top_risks|length > 0 %}
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>ICU % (Next Week)</th>
+      <th>Inpatient % (Next Week)</th>
+      <th>Risk Probability</th>
+      <th>Critical</th>
+      <th>Disease Burden</th>
+      <th>Suggested Neighbor</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for r in top_risks %}
+    <tr>
+      <td>
+        <a href="{{ url_for('main.state_page', state=r.state) }}">
+          {{ r.state_label }}
+        </a>
+      </td>
+
+      <td>{{ r.icu_pct_next_week_pred }}</td>
+      <td>{{ r.inpatient_pct_next_week_pred }}</td>
+      <td>{{ r.critical_risk_proba }}</td>
+      <td>{{ r.critical_risk_next_week_pred }}</td>
+      <td>{{ r.disease_burden_next_week_pred }}</td>
+
+      <td>
+        {% if r.neighbor_label %}
+          <a href="{{ url_for('main.state_page', state=r.suggested_neighbor_state) }}">
+            {{ r.neighbor_label }}
+          </a>
+        {% else %}
+          —
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+  <p>No states were predicted as critical risk for next week.</p>
+{% endif %}
+
+<p style="margin-top: 100px; font-size: 18px; border: 1px solid #44aa6d; padding: 2px 6px; border-radius: 8px;">
+  <a href="{{ url_for('main.index') }}">← Back to state selection</a>
+</p>
+
+{% endblock %}
+
+
